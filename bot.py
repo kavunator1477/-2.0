@@ -33,7 +33,7 @@ def ai_huyesos(message):
 
     try:
         response = client.chat.completions.create(
-            model="grok-2",                    # ← Робоча модель
+            model="grok-3",                    # ← Робоча модель
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"{user_name} написав: {user_text}\nЗахуєсось його сильно!"}
