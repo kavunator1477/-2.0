@@ -33,7 +33,7 @@ def ai_huyesos(message):
 
     try:
         response = client.chat.completions.create(
-            model="grok-2",,
+            model="grok-2",                    # ← Робоча модель
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"{user_name} написав: {user_text}\nЗахуєсось його сильно!"}
@@ -43,9 +43,12 @@ def ai_huyesos(message):
         )
         insult = response.choices[0].message.content.strip()
         bot.reply_to(message, insult)
+
     except Exception as e:
         print("Помилка API:", e)
-        bot.reply_to(message, f"Йобаний {user_name}, навіть бот не витримує тебе.")
+        # Запасний варіант (якщо API не працює)
+        fallback = f"Йобаний {user_name}, навіть бот не витримує тебе."
+        bot.reply_to(message, fallback)
 
 print("🚀 Хуєсос AI бот запущений...")
 bot.infinity_polling()
